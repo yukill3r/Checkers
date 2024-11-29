@@ -9,7 +9,7 @@ class Pawn():
 
 class White():
     color = "white"
-    image = 'img/white.png'
+    image = 'img/pawnWhite.png'
 
     def attack(self, row, column, board):
         attacks = []
@@ -37,7 +37,7 @@ class White():
 
 class Black():
     color = "black"
-    image = 'img/black.png'
+    image = 'img/pawnBlack.png'
 
     def attack(self, row, column, board):
         attacks = []
@@ -190,12 +190,24 @@ class Window():
         if (len(attacks) != 0):
             self.selectPiece(next)
         """
-        if self.turn == "white":
-            self.turn = "black"
+        
+        
+        if self.white_amount == 0:
+            self.ending("white")
+        elif self.black_amount == 0:
+            self.ending("black")
+
         else:
-            self.turn = "white"
-        self.generate_squares()
-        print(f"{self.turn} turn\nwhite: {self.white_amount}\nblack: {self.black_amount}")
+            if self.turn == "white":
+                self.turn = "black"
+            else:
+                self.turn = "white"
+
+            self.generate_squares()
+            print(f"{self.turn} turn\nwhite: {self.white_amount}\nblack: {self.black_amount}")
+    
+    def ending(self, color):
+        pass
 
 if __name__ == "__main__":
     app = Window()
