@@ -35,22 +35,9 @@ class Window():
     black_amount = 10
 
     def __init__(self):
-        #self.upgrade_to_queen((0, 1))
         self.generate_squares()
 
-    def upgrade_to_queen(self, position: (int, int)) -> Queen:
-        pawn = self.positions[position[0]][position[1]]
-        queen = Queen()
-        queen.color = pawn.color
-        queen.image = f"img/queen{pawn.color.capitalize()}"
-        self.positions[position[0]][position[1]] = queen
-        del pawn
-        self.generate_squares()
-
-    def generate_button(self, position):
-        button = PySide6.QtWidgets.QPushButton()
-        button.setFixedSize(*self.button_size)
-        button.setIconSize(PySide6.QtCore.QSize(*self.icon_size))
+    def background_color(self, position, button):
         first = "white"
         second = "grey"
         if(position[0] % 2 == 1):
@@ -60,71 +47,90 @@ class Window():
             button.setStyleSheet("background-color: " + first)
         else:
             button.setStyleSheet("background-color: " + second)
+
         if(self.positions[position[0]][position[1]]):
             button.setIcon(PySide6.QtGui.QIcon(self.positions[position[0]][position[1]].image))
+        else:
+            button.setIcon(PySide6.QtGui.QIcon())
+
+    def basic_connector(self, position, button):
+        button.disconnect(button)
+        if (self.positions[position[0]][position[1]] != None):
+            button.clicked.connect(partial(self.selectPiece, (position[0], position[1])))
+
+    def generate_button(self, position):
+        button = PySide6.QtWidgets.QPushButton()
+        button.setFixedSize(*self.button_size)
+        button.setIconSize(PySide6.QtCore.QSize(*self.icon_size))
+        self.background_color(position, button)
+        self.basic_connector(position, button)
         return button
 
     def generate_squares(self):
         for i in range(self.rows):
             for j in range(self.columns):
                 button = self.generate_button((i, j))
-                if (self.positions[i][j] != None):
-                    button.clicked.connect(partial(self.selectPiece, (i, j)))
                 self.grid.addWidget(button, i, j)
 
-    def color_arena(self, piece, moves = [], attacks = [], jumps = []):
-        def regen_button(grid, button, position):
-            if not isinstance(grid.itemAtPosition(*position), NoneType):
-                grid.removeWidget(grid.itemAtPosition(*position).widget())
-                grid.addWidget(button, *position)
+    def default_background_color_n_connectors(self):
+        for i in range(self.rows):
+            for j in range(self.columns):
+                button = self.grid.itemAtPosition(i, j).widget()
+                self.background_color((i, j), button)
+                self.basic_connector((i, j), button)
 
-        def generate_move_color(grid, piece, move):
+    def color_arena(self, pawn, position, moves = [], attacks = [], jumps = []):
+        def generate_move_color(move_place, position, move):
             if not self.positions[move[0]][move[1]]:
-                button  = self.generate_button(move)
-                button.setStyleSheet("background-color: green")
-                button.clicked.connect(partial(self.move, piece, move, piece))
-                regen_button(grid, button, move)
+                move_place.setStyleSheet("background-color: green")
+                move_place.disconnect(move_place)
+                move_place.clicked.connect(partial(self.move, position, move, position))
 
-        def generate_attack_color(grid, attack):
+        def generate_attack_color(attack_place, attack):
             if(self.positions[attack[0]][attack[1]]):
-                button  = self.generate_button(attack)
-                button.setStyleSheet("background-color: red")
-                regen_button(grid, button, attack)
+                attack_place.setStyleSheet("background-color: red")
+                attack_place.disconnect(attack_place)
         
-        def generate_jumps_color(grid, piece, jump):
+        def generate_jumps_color(jump_place, position, jump, attack):
             if not self.positions[jump[0]][jump[1]]:
-                button  = self.generate_button(jump)
-                button.setStyleSheet("background-color: yellow")
-                button.clicked.connect(partial(self.move, piece, jump, attack))
-                regen_button(grid, button, jump)
+                jump_place.setStyleSheet("background-color: yellow")
+                jump_place.disconnect(jump_place)
+                jump_place.clicked.connect(partial(self.move, position, jump, attack))
     
-        def generate_choosen_piece(grid, piece):
-            button  = self.generate_button(piece)
-            button.setStyleSheet("background-color: blue")
-            button.clicked.connect(partial(self.selectPiece, piece))
-            regen_button(grid, button, piece)
-
         NoneType = type(None)
         for move in moves:
-            generate_move_color(self.grid, piece, move)
+            move_place = self.grid.itemAtPosition(*move).widget()
+            generate_move_color(move_place, position, move)
 
         for attack, jump in zip(attacks, jumps):
-            generate_attack_color(self.grid, attack)
-            generate_jumps_color(self.grid, piece, jump)
+            attack_place = self.grid.itemAtPosition(*attack).widget()
+            jump_place = self.grid.itemAtPosition(*jump).widget()
+            generate_attack_color(attack_place, attack)
+            generate_jumps_color(jump_place, position, jump, attack)
         
-        generate_choosen_piece(self.grid, piece)
-                    
+                   
     def selectPiece(self, position):
-        self.generate_squares()
         if(self.positions[position[0]][position[1]]):
             if(self.positions[position[0]][position[1]].color == self.turn):
+                self.default_background_color_n_connectors()
+                button = self.grid.itemAtPosition(*position).widget()
+                button.setStyleSheet("background-color: blue")
+                button.disconnect(button)
                 attacks, jumps = self.positions[position[0]][position[1]].attack(
                     position[0], position[1], self.positions)
                 moves = self.positions[position[0]][position[1]].move(
                     position[0], position[1],self.positions)
                 if len(attacks) != 0:
                     moves = []
-                self.color_arena([position[0], position[1]], moves, attacks, jumps)
+                self.color_arena(button, position, moves, attacks, jumps)
+
+    def upgrade_to_queen(self, position: (int, int)):
+        pawn = self.positions[position[0]][position[1]]
+        queen = Queen()
+        queen.color = pawn.color
+        queen.image = f"img/queen{pawn.color.capitalize()}"
+        self.positions[position[0]][position[1]] = queen
+        del pawn
 
     def move(self, current, next, target):
         self.positions[next[0]][next[1]] = self.positions[current[0]][current[1]]
@@ -141,32 +147,18 @@ class Window():
                 self.upgrade_to_queen(next)
             elif self.positions[next[0]][next[1]].color == "black" and next[0] == self.rows-1:
                 self.upgrade_to_queen(next)
-
-        #print(self.grid.itemAtPosition(*target).widget())
         """
-        attacks, jumps = self.positions[next[0]][next[1]].attack(
-                    next[0], next[1], self.positions)
-        if (len(attacks) != 0):
-            self.selectPiece(next)
-        """
-        
-        
         if self.white_amount == 0:
             self.ending("white")
         elif self.black_amount == 0:
             self.ending("black")
-
+        """
+        if self.turn == "white":
+            self.turn = "black"
         else:
-            if self.turn == "white":
-                self.turn = "black"
-            else:
-                self.turn = "white"
-
-            self.generate_squares()
-            print(f"{self.turn} turn\nwhite: {self.white_amount}\nblack: {self.black_amount}")
-    
-    def ending(self, color):
-        pass
+            self.turn = "white"
+        self.default_background_color_n_connectors()
+        print(f"{self.turn} turn\nwhite: {self.white_amount}\nblack: {self.black_amount}")
 
 if __name__ == "__main__":
     app = Window()
