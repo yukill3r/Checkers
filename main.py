@@ -3,125 +3,19 @@ import PySide6.QtGui
 import PySide6.QtCore
 from functools import partial
 import sys
-
-class Queen():
-    pass
-
-class WhiteQ():
-    color = "white"
-    image = 'img/queenWhite.png'
-
-    def attack(self, row, column, board):
-        attacks = []
-        jumps = []
-        possibleAttacks = [
-            [row - 1, column - 1], [row - 1, column], [row - 1, column + 1],
-            [row, column - 1], [row, column + 1],
-            [row + 1, column - 1], [row + 1, column], [row + 1, column + 1]
-        ]
-        jump_point = [
-            [row - 2, column - 2], [row - 2, column], [row - 2, column + 2],
-            [row, column - 2], [row, column + 2],
-            [row + 2, column - 2], [row + 2, column], [row + 2, column + 2]
-        ]
-        
-        for attack, jump in zip(possibleAttacks, jump_point):
-            if(attack[0] >= 0 and attack[0] <= len(board)-2 and attack[1] >= 0 and attack[1] <= len(board)-2):
-                if(board[attack[0]][attack[1]] and not board[jump[0]][jump[1]]):
-                    if(board[attack[0]][attack[1]].color != self.color):
-                        attacks.append(attack)
-                        jumps.append(jump)
-        return attacks, jumps
-
-    def move(self, row, column, board):
-        moves = []
-        possibleMoves = [
-            [row - 1, column], [row - 1, column - 1], [row - 1, column + 1],
-            [row, column - 1], [row, column + 1],
-            [row + 1, column], [row + 1, column - 1], [row + 1, column + 1]
-        ]
-        
-        for move in possibleMoves:
-            if(move[0] >= 0 and move[0] <= 9 and move[1] >= 0 and move[1] <= 9):
-                if(not board[move[0]][move[1]]):
-                    moves.append(move)
-        return moves
-
-    
-
-class BlackQ():
-    pass
-
-class Pawn():
-    pass
-
-class White():
-    color = "white"
-    image = 'img/pawnWhite.png'
-
-    def attack(self, row, column, board):
-        attacks = []
-        jumps = []
-        possibleAttacks = [[row - 1, column - 1], [row - 1, column + 1] ]
-        jump_point = [[row - 2, column - 2], [row - 2, column + 2]]
-        
-        for attack, jump in zip(possibleAttacks, jump_point):
-            if(attack[0] >= 0 and attack[0] <= len(board)-2 and attack[1] >= 0 and attack[1] <= len(board)-2):
-                if(board[attack[0]][attack[1]] and not board[jump[0]][jump[1]]):
-                    if(board[attack[0]][attack[1]].color != self.color):
-                        attacks.append(attack)
-                        jumps.append(jump)
-        return attacks, jumps
-
-    def move(self, row, column, board):
-        moves = []
-        possibleMoves = [[row - 1, column]]
-        
-        for move in possibleMoves:
-            if(move[0] >= 0 and move[0] <= 9 and move[1] >= 0 and move[1] <= 9):
-                if(not board[move[0]][move[1]]):
-                    moves.append(move)
-        return moves
-
-class Black():
-    color = "black"
-    image = 'img/pawnBlack.png'
-
-    def attack(self, row, column, board):
-        attacks = []
-        jumps = []
-        possibleAttacks = [[row + 1, column - 1], [row + 1, column + 1] ]
-        jump_point = [[row + 2, column - 2], [row + 2, column + 2]]
-        
-        for attack, jump in zip(possibleAttacks, jump_point):
-            if(attack[0] >= 0 and attack[0] <= len(board)-2 and attack[1] >= 0 and attack[1] <= len(board)-2):
-                if(board[attack[0]][attack[1]] and not board[jump[0]][jump[1]]):
-                    if(board[attack[0]][attack[1]].color != self.color):
-                        attacks.append(attack)
-                        jumps.append(jump)
-        return attacks, jumps
-
-    def move(self, row, column, board):
-        moves = []
-        possibleMoves = [[row + 1, column]]
-        
-        for move in possibleMoves:
-            if(move[0] >= 0 and move[0] <= len(board)-1 and move[1] >= 0 and move[1] <= len(board)-1):
-                if(not board[move[0]][move[1]]):
-                    moves.append(move)
-        return moves
+from pawns import *
 
 class Window():
     positions = [
                 [None, Black(), None, Black(), None, Black(), None, Black(), None, Black()],
-                [Black(), None, Black(), None, Black(), None, Black(), None, Black(), None],
+                [Black(), None, White(), None, Black(), None, Black(), None, Black(), None],
                 [None, Black(), None, Black(), None, Black(), None, Black(), None, Black()],
                 [Black(), None, Black(), None, Black(), None, Black(), None, Black(), None],
                 [None, None, None, None, None, None, None, None, None, None],
                 [None, None, None, None, None, None, None, None, None, None],
-                [None, White(), None, White(), None, WhiteQ(), None, White(), None, White()],
-                [White(), None, White(), None, White(), None, White(), None, White(), None],
                 [None, White(), None, White(), None, White(), None, White(), None, White()],
+                [White(), None, White(), None, White(), None, White(), None, White(), None],
+                [None, Black(), None, White(), None, White(), None, White(), None, White()],
                 [White(), None, White(), None, White(), None, White(), None, White(), None]
             ]
     rows = len(positions)
@@ -141,6 +35,16 @@ class Window():
     black_amount = 10
 
     def __init__(self):
+        #self.upgrade_to_queen((0, 1))
+        self.generate_squares()
+
+    def upgrade_to_queen(self, position: (int, int)) -> Queen:
+        pawn = self.positions[position[0]][position[1]]
+        queen = Queen()
+        queen.color = pawn.color
+        queen.image = f"img/queen{pawn.color.capitalize()}"
+        self.positions[position[0]][position[1]] = queen
+        del pawn
         self.generate_squares()
 
     def generate_button(self, position):
@@ -203,9 +107,9 @@ class Window():
         NoneType = type(None)
         for move in moves:
             generate_move_color(self.grid, piece, move)
-        for attack in attacks:
+
+        for attack, jump in zip(attacks, jumps):
             generate_attack_color(self.grid, attack)
-        for jump in jumps:
             generate_jumps_color(self.grid, piece, jump)
         
         generate_choosen_piece(self.grid, piece)
@@ -231,6 +135,13 @@ class Window():
                 self.white_amount -= 1
         self.positions[current[0]][current[1]] = None
         self.positions[target[0]][target[1]] = None
+        
+        if not isinstance(self.positions[next[0]][next[1]], Queen):
+            if self.positions[next[0]][next[1]].color == "white" and next[0] == 0:
+                self.upgrade_to_queen(next)
+            elif self.positions[next[0]][next[1]].color == "black" and next[0] == self.rows-1:
+                self.upgrade_to_queen(next)
+
         #print(self.grid.itemAtPosition(*target).widget())
         """
         attacks, jumps = self.positions[next[0]][next[1]].attack(
