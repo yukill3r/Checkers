@@ -31,8 +31,8 @@ class Window():
     win.setGeometry(0,0,820,640)
     turn = "white"
     multiple_attacks = False
-    white_amount = 10
-    black_amount = 10
+    white_amount = 20
+    black_amount = 20
 
     def __init__(self):
         self.generate_squares()
@@ -124,7 +124,7 @@ class Window():
                     moves = []
                 self.color_arena(button, position, moves, attacks, jumps)
 
-    def upgrade_to_queen(self, position: (int, int)):
+    def upgrade_to_queen(self, position):
         pawn = self.positions[position[0]][position[1]]
         queen = Queen()
         queen.color = pawn.color
@@ -142,11 +142,15 @@ class Window():
         self.positions[current[0]][current[1]] = None
         self.positions[target[0]][target[1]] = None
         
-        if not isinstance(self.positions[next[0]][next[1]], Queen):
-            if self.positions[next[0]][next[1]].color == "white" and next[0] == 0:
-                self.upgrade_to_queen(next)
-            elif self.positions[next[0]][next[1]].color == "black" and next[0] == self.rows-1:
-                self.upgrade_to_queen(next)
+        try:
+            if isinstance(self.positions[next[0]][next[1]], White) or isinstance(self.positions[next[0]][next[1]], Black):
+                if not isinstance(self.positions[next[0]][next[1]], Queen):
+                    if self.positions[next[0]][next[1]].color == "white" and next[0] == 0:
+                        self.upgrade_to_queen(next)
+                    elif self.positions[next[0]][next[1]].color == "black" and next[0] == self.rows-1:
+                        self.upgrade_to_queen(next)
+        except Exception as e:
+            print(e)
         """
         if self.white_amount == 0:
             self.ending("white")
