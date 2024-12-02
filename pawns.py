@@ -21,8 +21,6 @@ class Pawn(ABC):
                     move_next[1] += move[1]
                     enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
                     continue
-            else:
-                break
         return moves, enemies
 
 
@@ -50,9 +48,7 @@ class Queen(Pawn):
                         move_next[0] += move[0]
                         move_next[1] += move[1]
                         enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
-                        continue
-                else:
-                    break
+                        break
         return moves, enemies
 
 class White(Pawn):
