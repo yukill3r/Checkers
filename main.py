@@ -7,6 +7,18 @@ from pawns import *
 
 class Window():
     positions = [
+                [None, None, None, None, None, None, None, None, None, None],
+                [None, None, White(), None, None, None, None, None, None, None],
+                [None, None, None, None, None, None, None, None, None, None],
+                [None, None, None, None, None, None, None, None, None, None],
+                [None, None, None, None, Black(), None, Black(), None, None, None],
+                [None, None, None, White(), None, White(), None, None, None, None],
+                [None, None, None, None, None, None, None, None, None, None],
+                [None, None, None, None, None, None, None, None, None, None],
+                [None, Black(), None, None, None, None, None, None, None, None],
+                [None, None, None, None, None, None, None, None, None, None]
+            ]
+    positions2 = [
                 [None, Black(), None, Black(), None, Black(), None, Black(), None, Black()],
                 [Black(), None, White(), None, Black(), None, Black(), None, Black(), None],
                 [None, Black(), None, Black(), None, Black(), None, Black(), None, Black()],
@@ -79,7 +91,7 @@ class Window():
                 self.background_color((i, j), button)
                 self.basic_connector((i, j), button)
 
-    def color_arena(self, pawn, position, moves = [], attacks = [], jumps = []):
+    def color_arena(self, pawn, position, moves = [], enemies = []):
         def generate_move_color(move_place, position, move):
             if not self.positions[move[0]][move[1]]:
                 move_place.setStyleSheet("background-color: green")
@@ -102,7 +114,8 @@ class Window():
             move_place = self.grid.itemAtPosition(*move).widget()
             generate_move_color(move_place, position, move)
 
-        for attack, jump in zip(attacks, jumps):
+        for attack, jump in enemies:
+            print(attack, jump)
             attack_place = self.grid.itemAtPosition(*attack).widget()
             jump_place = self.grid.itemAtPosition(*jump).widget()
             generate_attack_color(attack_place, attack)
@@ -116,13 +129,10 @@ class Window():
                 button = self.grid.itemAtPosition(*position).widget()
                 button.setStyleSheet("background-color: blue")
                 button.disconnect(button)
-                attacks, jumps = self.positions[position[0]][position[1]].attack(
+                moves, enemies = self.positions[position[0]][position[1]].move_n_attacks(
                     position[0], position[1], self.positions)
-                moves = self.positions[position[0]][position[1]].move(
-                    position[0], position[1],self.positions)
-                if len(attacks) != 0:
-                    moves = []
-                self.color_arena(button, position, moves, attacks, jumps)
+                print(moves, enemies)
+                self.color_arena(button, position, moves, enemies)
 
     def upgrade_to_queen(self, position):
         pawn = self.positions[position[0]][position[1]]
@@ -162,7 +172,7 @@ class Window():
         else:
             self.turn = "white"
         self.default_background_color_n_connectors()
-        print(f"{self.turn} turn\nwhite: {self.white_amount}\nblack: {self.black_amount}")
+        print(f"{self.turn} turn\n\twhite: {self.white_amount}\n\tblack: {self.black_amount}")
 
 if __name__ == "__main__":
     app = Window()
