@@ -22,14 +22,12 @@ class Queen(Pawn):
         attacks = []
         jumps = []
         possibleAttacks = [
-            [row - 1, column - 1], [row - 1, column], [row - 1, column + 1],
-            [row, column - 1], [row, column + 1],
-            [row + 1, column - 1], [row + 1, column], [row + 1, column + 1]
+            [row - 1, column - 1], [row - 1, column + 1],
+            [row + 1, column - 1], [row + 1, column + 1]
         ]
         jump_point = [
-            [row - 2, column - 2], [row - 2, column], [row - 2, column + 2],
-            [row, column - 2], [row, column + 2],
-            [row + 2, column - 2], [row + 2, column], [row + 2, column + 2]
+            [row - 2, column - 2], [row - 2, column + 2],
+            [row + 2, column - 2], [row + 2, column + 2]
         ]
         
         for attack, jump in zip(possibleAttacks, jump_point):
@@ -44,15 +42,31 @@ class Queen(Pawn):
     def move(self, row, column, board):
         moves = []
         possibleMoves = [
-            [row - 1, column], [row - 1, column - 1], [row - 1, column + 1],
-            [row, column - 1], [row, column + 1],
-            [row + 1, column], [row + 1, column - 1], [row + 1, column + 1]
+            [row - 1, column - 1], [row - 1, column + 1],
+            [row + 1, column - 1], [row + 1, column + 1]
         ]
-        
-        for move in possibleMoves:
-            if(move[0] >= 0 and move[0] <= 9 and move[1] >= 0 and move[1] <= 9):
-                if(not board[move[0]][move[1]]):
+        corner_cancer = [
+            [-1, -1], [-1, 1],
+            [1, -1], [1, 1]
+        ]
+
+        move_cornored = [0, 0]
+        for move, corner in zip(possibleMoves, corner_cancer):
+            if(move[0] >= 0 and move[0] <= 9 and move[1] >= 0 and move[1] <= 9):        
+                if (not board[move[0]][move[1]]):
                     moves.append(move)
+            move_cornored[0] = move[0]
+            move_cornored[1] = move[1]
+            for _ in range(9):
+                move_cornored[0] += corner[0]
+                move_cornored[1] += corner[1]
+                if(move_cornored[0] >= 0 and move_cornored[0] <= 9 and move_cornored[1] >= 0 and move_cornored[1] <= 9):
+                    moves.append(move_cornored)
+                    print(move_cornored)
+            """
+                    if (not board[move_cornored[0]][move_cornored[1]]):
+            """
+        print(moves)
         return moves
 
 class White(Pawn):
@@ -79,7 +93,7 @@ class White(Pawn):
 
     def move(self, row, column, board):
         moves = []
-        possibleMoves = [[row - 1, column]]
+        possibleMoves = [[row - 1, column - 1], [row - 1, column + 1]]
         
         for move in possibleMoves:
             if(move[0] >= 0 and move[0] <= 9 and move[1] >= 0 and move[1] <= 9):
@@ -111,7 +125,7 @@ class Black(Pawn):
 
     def move(self, row, column, board):
         moves = []
-        possibleMoves = [[row + 1, column]]
+        possibleMoves = [[row + 1, column - 1], [row + 1, column + 1]]
         
         for move in possibleMoves:
             if(move[0] >= 0 and move[0] <= len(board)-1 and move[1] >= 0 and move[1] <= len(board)-1):
