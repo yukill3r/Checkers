@@ -16,11 +16,14 @@ class Pawn(ABC):
                 if(not board[move_added[0]][move_added[1]]):
                     moves.append(move_added)
                 else:
-                    move_next = [move_added[0], move_added[1]]
-                    move_next[0] += move[0]
-                    move_next[1] += move[1]
-                    enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
-                    continue
+                    if (self.color != board[move_added[0]][move_added[1]].color):
+                        move_next = [move_added[0], move_added[1]]
+                        move_next[0] += move[0]
+                        move_next[1] += move[1]
+                        if(move_next[0] >= 0 and move_next[0] <= 9 and move_next[1] >= 0 and move_next[1] <= 9):
+                            if(not board[move_next[0]][move_next[1]]):
+                                enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
+                                continue
         return moves, enemies
 
 
@@ -43,11 +46,15 @@ class Queen(Pawn):
                     if(not board[move_added[0]][move_added[1]] and not enemy_found):
                         moves.append([move_added[0], move_added[1]])
                     else:
-                        enemy_found = True
-                        move_next = [move_added[0], move_added[1]]
-                        move_next[0] += move[0]
-                        move_next[1] += move[1]
-                        enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
+                        if (self.color != board[move_added[0]][move_added[1]].color):
+                            enemy_found = True
+                            move_next = [move_added[0], move_added[1]]
+                            move_next[0] += move[0]
+                            move_next[1] += move[1]
+                            if(move_next[0] >= 0 and move_next[0] <= 9 and move_next[1] >= 0 and move_next[1] <= 9):
+                                if(not board[move_next[0]][move_next[1]]):
+                                    enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
+                                    break
                         break
         return moves, enemies
 

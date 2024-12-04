@@ -7,47 +7,39 @@ from pawns import *
 
 class Window():
     positions = [
-                [None, None, None, None, None, None, None, None, None, None],
-                [None, None, White(), None, None, None, None, None, None, None],
-                [None, None, None, None, None, None, None, None, None, None],
-                [None, None, None, None, None, None, None, None, None, None],
-                [None, None, None, None, Black(), None, Black(), None, None, None],
-                [None, None, None, White(), None, White(), None, None, None, None],
-                [None, None, None, None, None, None, None, None, None, None],
-                [None, None, None, None, None, None, None, None, None, None],
-                [None, Black(), None, None, None, None, None, None, None, None],
-                [None, None, None, None, None, None, None, None, None, None]
-            ]
-    positions2 = [
                 [None, Black(), None, Black(), None, Black(), None, Black(), None, Black()],
-                [Black(), None, White(), None, Black(), None, Black(), None, Black(), None],
+                [Black(), None, Black(), None, Black(), None, Black(), None, Black(), None],
                 [None, Black(), None, Black(), None, Black(), None, Black(), None, Black()],
                 [Black(), None, Black(), None, Black(), None, Black(), None, Black(), None],
                 [None, None, None, None, None, None, None, None, None, None],
                 [None, None, None, None, None, None, None, None, None, None],
                 [None, White(), None, White(), None, White(), None, White(), None, White()],
                 [White(), None, White(), None, White(), None, White(), None, White(), None],
-                [None, Black(), None, White(), None, White(), None, White(), None, White()],
+                [None, White(), None, White(), None, White(), None, White(), None, White()],
                 [White(), None, White(), None, White(), None, White(), None, White(), None]
             ]
     rows = len(positions)
     columns = len(positions[0])
-    button_size = (75, 75)
+    button_size = (65, 65)
     icon_size = (50,50)
 
     app = PySide6.QtWidgets.QApplication(sys.argv)
     win = PySide6.QtWidgets.QWidget()
     grid = PySide6.QtWidgets.QGridLayout()
     win.setLayout(grid)
-    win.setWindowTitle("Warcaby")
-    win.setGeometry(0,0,820,640)
+    base_name = "Warcaby"
+    win.setGeometry(0,0,0,0)
     turn = "white"
     multiple_attacks = False
     white_amount = 20
     black_amount = 20
 
     def __init__(self):
+        self.generate_title()
         self.generate_squares()
+
+    def generate_title(self):
+        self.win.setWindowTitle(f"{self.base_name}|{self.turn.capitalize()}|White: {self.white_amount}|Black: {self.black_amount}")
 
     def background_color(self, position, button):
         first = "white"
@@ -115,7 +107,6 @@ class Window():
             generate_move_color(move_place, position, move)
 
         for attack, jump in enemies:
-            print(attack, jump)
             attack_place = self.grid.itemAtPosition(*attack).widget()
             jump_place = self.grid.itemAtPosition(*jump).widget()
             generate_attack_color(attack_place, attack)
@@ -131,7 +122,6 @@ class Window():
                 button.disconnect(button)
                 moves, enemies = self.positions[position[0]][position[1]].move_n_attacks(
                     position[0], position[1], self.positions)
-                print(moves, enemies)
                 self.color_arena(button, position, moves, enemies)
 
     def upgrade_to_queen(self, position):
@@ -161,18 +151,25 @@ class Window():
                         self.upgrade_to_queen(next)
         except Exception as e:
             print(e)
-        """
-        if self.white_amount == 0:
-            self.ending("white")
-        elif self.black_amount == 0:
-            self.ending("black")
-        """
         if self.turn == "white":
             self.turn = "black"
         else:
             self.turn = "white"
+        self.generate_title()
+
+        if not self.white_amount > 0:
+            self.ending("Black")
+        elif not self.black_amount > 0:
+            self.ending("white")
         self.default_background_color_n_connectors()
-        print(f"{self.turn} turn\n\twhite: {self.white_amount}\n\tblack: {self.black_amount}")
+        
+    def ending(self, color):
+        for i in range(self.rows):
+            for j in range(self.columns):
+                button = self.grid.itemAtPosition(i,j).widget()
+                button.deleteLater()
+        
+        print(f"{color.capitalize()} won")
 
 if __name__ == "__main__":
     app = Window()
