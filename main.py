@@ -1,11 +1,12 @@
-import PySide6.QtWidgets
-import PySide6.QtGui
-import PySide6.QtCore
-from functools import partial
 import sys
+from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton
+from PyQt6.QtCore import pyqtSlot, QFile, QTextStream
+from PyQt6.QtGui import QIcon
+from functools import partial
+from default_ui import Ui_MainWindow
 from pawns import *
 
-class Window():
+class Main_Window(QMainWindow):
     positions = [
                 [None, Black(), None, Black(), None, Black(), None, Black(), None, Black()],
                 [Black(), None, Black(), None, Black(), None, Black(), None, Black(), None],
@@ -20,27 +21,14 @@ class Window():
             ]
     rows = len(positions)
     columns = len(positions[0])
-    button_size = (65, 65)
-    icon_size = (50,50)
-
-    app = PySide6.QtWidgets.QApplication(sys.argv)
-    win = PySide6.QtWidgets.QWidget()
-    grid = PySide6.QtWidgets.QGridLayout()
-    win.setLayout(grid)
-    base_name = "Warcaby"
-    win.setGeometry(0,0,0,0)
     turn = "white"
-    multiple_attacks = False
+    base_name = "Warcaby"
     white_amount = 20
     black_amount = 20
 
-    def __init__(self):
-        self.generate_title()
-        self.generate_squares()
-
     def generate_title(self):
-        self.win.setWindowTitle(f"{self.base_name}|{self.turn.capitalize()}|White: {self.white_amount}|Black: {self.black_amount}")
-
+        self.setWindowTitle(f"{self.base_name} | {self.turn.capitalize()} | White: {self.white_amount} | Black: {self.black_amount}")
+        
     def background_color(self, position, button):
         first = "white"
         second = "grey"
@@ -53,84 +41,71 @@ class Window():
             button.setStyleSheet("background-color: " + second)
 
         if(self.positions[position[0]][position[1]]):
-            button.setIcon(PySide6.QtGui.QIcon(self.positions[position[0]][position[1]].image))
+            button.setIcon(QIcon(self.positions[position[0]][position[1]].image))
         else:
-            button.setIcon(PySide6.QtGui.QIcon())
+            button.setIcon(QIcon())
 
     def basic_connector(self, position, button):
-        button.disconnect(button)
+        try:
+            button.disconnect()
+        except:
+            pass
         if (self.positions[position[0]][position[1]] != None):
-            button.clicked.connect(partial(self.selectPiece, (position[0], position[1])))
-
-    def generate_button(self, position):
-        button = PySide6.QtWidgets.QPushButton()
-        button.setFixedSize(*self.button_size)
-        button.setIconSize(PySide6.QtCore.QSize(*self.icon_size))
-        self.background_color(position, button)
-        self.basic_connector(position, button)
-        return button
-
-    def generate_squares(self):
-        for i in range(self.rows):
-            for j in range(self.columns):
-                button = self.generate_button((i, j))
-                self.grid.addWidget(button, i, j)
+            button.clicked.connect(partial(self.selectPiece, position))
 
     def default_background_color_n_connectors(self):
         for i in range(self.rows):
             for j in range(self.columns):
-                button = self.grid.itemAtPosition(i, j).widget()
+                button = self.ui.gridLayout.itemAtPosition(i, j).widget()
                 self.background_color((i, j), button)
                 self.basic_connector((i, j), button)
+    
+    def selectPiece(self, position):
+        print(position)
+        if(self.positions[position[0]][position[1]]):
+            if(self.positions[position[0]][position[1]].color == self.turn):
+                self.default_background_color_n_connectors()
+                button = self.ui.gridLayout.itemAtPosition(*position).widget()
+                button.setStyleSheet("background-color: blue")
+                button.disconnect()
+                moves, enemies = self.positions[position[0]][position[1]].move_n_attacks(
+                    position[0], position[1], self.positions)
+                self.color_arena(button, position, moves, enemies)
 
     def color_arena(self, pawn, position, moves = [], enemies = []):
         def generate_move_color(move_place, position, move):
             if not self.positions[move[0]][move[1]]:
                 move_place.setStyleSheet("background-color: green")
-                move_place.disconnect(move_place)
+                try:
+                    move_place.disconnect()
+                except:
+                    pass
                 move_place.clicked.connect(partial(self.move, position, move, position))
 
         def generate_attack_color(attack_place, attack):
             if(self.positions[attack[0]][attack[1]]):
                 attack_place.setStyleSheet("background-color: red")
-                attack_place.disconnect(attack_place)
+                attack_place.disconnect()
         
         def generate_jumps_color(jump_place, position, jump, attack):
             if not self.positions[jump[0]][jump[1]]:
                 jump_place.setStyleSheet("background-color: yellow")
-                jump_place.disconnect(jump_place)
+                try:
+                    jump_place.disconnect()
+                except:
+                    pass
                 jump_place.clicked.connect(partial(self.move, position, jump, attack))
     
         NoneType = type(None)
         for move in moves:
-            move_place = self.grid.itemAtPosition(*move).widget()
+            move_place = self.ui.gridLayout.itemAtPosition(*move).widget()
             generate_move_color(move_place, position, move)
 
         for attack, jump in enemies:
-            attack_place = self.grid.itemAtPosition(*attack).widget()
-            jump_place = self.grid.itemAtPosition(*jump).widget()
+            attack_place = self.ui.gridLayout.itemAtPosition(*attack).widget()
+            jump_place = self.ui.gridLayout.itemAtPosition(*jump).widget()
             generate_attack_color(attack_place, attack)
             generate_jumps_color(jump_place, position, jump, attack)
-        
-                   
-    def selectPiece(self, position):
-        if(self.positions[position[0]][position[1]]):
-            if(self.positions[position[0]][position[1]].color == self.turn):
-                self.default_background_color_n_connectors()
-                button = self.grid.itemAtPosition(*position).widget()
-                button.setStyleSheet("background-color: blue")
-                button.disconnect(button)
-                moves, enemies = self.positions[position[0]][position[1]].move_n_attacks(
-                    position[0], position[1], self.positions)
-                self.color_arena(button, position, moves, enemies)
-
-    def upgrade_to_queen(self, position):
-        pawn = self.positions[position[0]][position[1]]
-        queen = Queen()
-        queen.color = pawn.color
-        queen.image = f"img/queen{pawn.color.capitalize()}"
-        self.positions[position[0]][position[1]] = queen
-        del pawn
 
     def move(self, current, next, target):
         self.positions[next[0]][next[1]] = self.positions[current[0]][current[1]]
@@ -151,6 +126,7 @@ class Window():
                         self.upgrade_to_queen(next)
         except Exception as e:
             print(e)
+        
         if self.turn == "white":
             self.turn = "black"
         else:
@@ -162,16 +138,24 @@ class Window():
         elif not self.black_amount > 0:
             self.ending("white")
         self.default_background_color_n_connectors()
-        
-    def ending(self, color):
-        for i in range(self.rows):
-            for j in range(self.columns):
-                button = self.grid.itemAtPosition(i,j).widget()
-                button.deleteLater()
-        
-        print(f"{color.capitalize()} won")
 
-if __name__ == "__main__":
-    app = Window()
-    app.win.show()
-    exit(app.app.exec())
+    def upgrade_to_queen(self, position):
+        pawn = self.positions[position[0]][position[1]]
+        queen = Queen()
+        queen.color = pawn.color
+        queen.image = f"img/queen{pawn.color.capitalize()}"
+        self.positions[position[0]][position[1]] = queen
+        del pawn
+
+    def __init__(self):
+        super(Main_Window, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.generate_title()
+        self.default_background_color_n_connectors()
+            
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = Main_Window()
+    window.show()
+    sys.exit(app.exec())
