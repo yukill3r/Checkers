@@ -82,8 +82,8 @@
        <widget class="QPushButton" name="b_0_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="autoFillBackground">
@@ -107,8 +107,8 @@
        <widget class="QPushButton" name="b_0_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -129,8 +129,8 @@
        <widget class="QPushButton" name="b_0_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -151,8 +151,8 @@
        <widget class="QPushButton" name="b_0_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -173,8 +173,8 @@
        <widget class="QPushButton" name="b_0_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -195,8 +195,8 @@
        <widget class="QPushButton" name="b_0_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -217,8 +217,8 @@
        <widget class="QPushButton" name="b_0_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -239,8 +239,8 @@
        <widget class="QPushButton" name="b_0_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -261,8 +261,8 @@
        <widget class="QPushButton" name="b_0_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -283,8 +283,8 @@
        <widget class="QPushButton" name="b_0_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -305,8 +305,8 @@
        <widget class="QPushButton" name="b_1_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -327,8 +327,8 @@
        <widget class="QPushButton" name="b_1_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -349,8 +349,8 @@
        <widget class="QPushButton" name="b_1_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -371,8 +371,8 @@
        <widget class="QPushButton" name="b_1_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -393,8 +393,8 @@
        <widget class="QPushButton" name="b_1_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -415,8 +415,8 @@
        <widget class="QPushButton" name="b_1_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -437,8 +437,8 @@
        <widget class="QPushButton" name="b_1_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -459,8 +459,8 @@
        <widget class="QPushButton" name="b_1_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -481,8 +481,8 @@
        <widget class="QPushButton" name="b_1_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -503,8 +503,8 @@
        <widget class="QPushButton" name="b_1_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -525,8 +525,8 @@
        <widget class="QPushButton" name="b_2_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -547,8 +547,8 @@
        <widget class="QPushButton" name="b_2_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -569,8 +569,8 @@
        <widget class="QPushButton" name="b_2_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -591,8 +591,8 @@
        <widget class="QPushButton" name="b_2_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -613,8 +613,8 @@
        <widget class="QPushButton" name="b_2_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -635,8 +635,8 @@
        <widget class="QPushButton" name="b_2_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -657,8 +657,8 @@
        <widget class="QPushButton" name="b_2_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -679,8 +679,8 @@
        <widget class="QPushButton" name="b_2_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -701,8 +701,8 @@
        <widget class="QPushButton" name="b_2_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -723,8 +723,8 @@
        <widget class="QPushButton" name="b_2_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -745,8 +745,8 @@
        <widget class="QPushButton" name="b_3_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -767,8 +767,8 @@
        <widget class="QPushButton" name="b_3_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -789,8 +789,8 @@
        <widget class="QPushButton" name="b_3_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -811,8 +811,8 @@
        <widget class="QPushButton" name="b_3_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -833,8 +833,8 @@
        <widget class="QPushButton" name="b_3_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -855,8 +855,8 @@
        <widget class="QPushButton" name="b_3_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -877,8 +877,8 @@
        <widget class="QPushButton" name="b_3_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -899,8 +899,8 @@
        <widget class="QPushButton" name="b_3_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -921,8 +921,8 @@
        <widget class="QPushButton" name="b_3_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -943,8 +943,8 @@
        <widget class="QPushButton" name="b_3_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -965,8 +965,8 @@
        <widget class="QPushButton" name="b_4_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -987,8 +987,8 @@
        <widget class="QPushButton" name="b_4_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1009,8 +1009,8 @@
        <widget class="QPushButton" name="b_4_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1031,8 +1031,8 @@
        <widget class="QPushButton" name="b_4_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1053,8 +1053,8 @@
        <widget class="QPushButton" name="b_4_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1075,8 +1075,8 @@
        <widget class="QPushButton" name="b_4_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1097,8 +1097,8 @@
        <widget class="QPushButton" name="b_4_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1119,8 +1119,8 @@
        <widget class="QPushButton" name="b_4_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1141,8 +1141,8 @@
        <widget class="QPushButton" name="b_4_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1163,8 +1163,8 @@
        <widget class="QPushButton" name="b_4_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1185,8 +1185,8 @@
        <widget class="QPushButton" name="b_5_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1207,8 +1207,8 @@
        <widget class="QPushButton" name="b_5_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1229,8 +1229,8 @@
        <widget class="QPushButton" name="b_5_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1251,8 +1251,8 @@
        <widget class="QPushButton" name="b_5_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1273,8 +1273,8 @@
        <widget class="QPushButton" name="b_5_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1295,8 +1295,8 @@
        <widget class="QPushButton" name="b_5_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1317,8 +1317,8 @@
        <widget class="QPushButton" name="b_5_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1339,8 +1339,8 @@
        <widget class="QPushButton" name="b_5_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1361,8 +1361,8 @@
        <widget class="QPushButton" name="b_5_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1383,8 +1383,8 @@
        <widget class="QPushButton" name="b_5_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1405,8 +1405,8 @@
        <widget class="QPushButton" name="b_6_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1427,8 +1427,8 @@
        <widget class="QPushButton" name="b_6_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1449,8 +1449,8 @@
        <widget class="QPushButton" name="b_6_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1471,8 +1471,8 @@
        <widget class="QPushButton" name="b_6_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1493,8 +1493,8 @@
        <widget class="QPushButton" name="b_6_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1515,8 +1515,8 @@
        <widget class="QPushButton" name="b_6_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1537,8 +1537,8 @@
        <widget class="QPushButton" name="b_6_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1559,8 +1559,8 @@
        <widget class="QPushButton" name="b_6_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1581,8 +1581,8 @@
        <widget class="QPushButton" name="b_6_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1603,8 +1603,8 @@
        <widget class="QPushButton" name="b_6_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1625,8 +1625,8 @@
        <widget class="QPushButton" name="b_7_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1647,8 +1647,8 @@
        <widget class="QPushButton" name="b_7_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1669,8 +1669,8 @@
        <widget class="QPushButton" name="b_7_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1691,8 +1691,8 @@
        <widget class="QPushButton" name="b_7_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1713,8 +1713,8 @@
        <widget class="QPushButton" name="b_7_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1735,8 +1735,8 @@
        <widget class="QPushButton" name="b_7_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1757,8 +1757,8 @@
        <widget class="QPushButton" name="b_7_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1779,8 +1779,8 @@
        <widget class="QPushButton" name="b_7_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1801,8 +1801,8 @@
        <widget class="QPushButton" name="b_7_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1823,8 +1823,8 @@
        <widget class="QPushButton" name="b_7_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1845,8 +1845,8 @@
        <widget class="QPushButton" name="b_8_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1867,8 +1867,8 @@
        <widget class="QPushButton" name="b_8_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1889,8 +1889,8 @@
        <widget class="QPushButton" name="b_8_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1911,8 +1911,8 @@
        <widget class="QPushButton" name="b_8_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1933,8 +1933,8 @@
        <widget class="QPushButton" name="b_8_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1955,8 +1955,8 @@
        <widget class="QPushButton" name="b_8_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1977,8 +1977,8 @@
        <widget class="QPushButton" name="b_8_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -1999,8 +1999,8 @@
        <widget class="QPushButton" name="b_8_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2021,8 +2021,8 @@
        <widget class="QPushButton" name="b_8_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2043,8 +2043,8 @@
        <widget class="QPushButton" name="b_8_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2065,8 +2065,8 @@
        <widget class="QPushButton" name="b_9_0">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2087,8 +2087,8 @@
        <widget class="QPushButton" name="b_9_1">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2109,8 +2109,8 @@
        <widget class="QPushButton" name="b_9_2">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2131,8 +2131,8 @@
        <widget class="QPushButton" name="b_9_3">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2153,8 +2153,8 @@
        <widget class="QPushButton" name="b_9_4">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2175,8 +2175,8 @@
        <widget class="QPushButton" name="b_9_5">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2197,8 +2197,8 @@
        <widget class="QPushButton" name="b_9_6">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2219,8 +2219,8 @@
        <widget class="QPushButton" name="b_9_7">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2241,8 +2241,8 @@
        <widget class="QPushButton" name="b_9_8">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2263,8 +2263,8 @@
        <widget class="QPushButton" name="b_9_9">
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>75</height>
+          <width>65</width>
+          <height>65</height>
          </size>
         </property>
         <property name="text">
@@ -2291,7 +2291,7 @@
      <x>0</x>
      <y>0</y>
      <width>835</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
