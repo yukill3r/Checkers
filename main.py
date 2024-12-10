@@ -147,6 +147,44 @@ class Main_Window(QMainWindow):
         self.positions[position[0]][position[1]] = queen
         del pawn
 
+    def ending_win(self, color_winner, color_loser):
+        for x in range(10):
+            for z in [0, 1, 8, 9]:
+                button = self.ui.gridLayout.itemAtPosition(x, z).widget()
+                button.setStyleSheet(f"background-color: {color_winner}")
+        for x in range(6,9,1):
+            for z in [2, 7]:
+                button = self.ui.gridLayout.itemAtPosition(x, z).widget()
+                button.setStyleSheet(f"background-color: {color_winner}")
+        for x in range(5,8,1):
+            for z in [3, 6]:
+                button = self.ui.gridLayout.itemAtPosition(x, z).widget()
+                button.setStyleSheet(f"background-color: {color_winner}")
+        for x in range(4,7,1):
+            for z in [4, 5]:
+                button = self.ui.gridLayout.itemAtPosition(x, z).widget()
+                button.setStyleSheet(f"background-color: {color_winner}")
+        for x in range(4):
+            for y in range(2,8,1):
+                button = self.ui.gridLayout.itemAtPosition(x, y).widget()
+                button.setStyleSheet(f"background-color: {color_loser}")
+        for x in range(2,8,1):
+            button = self.ui.gridLayout.itemAtPosition(9, x).widget()
+            button.setStyleSheet(f"background-color: {color_loser}")
+        for x in range(3,7,1):
+            button = self.ui.gridLayout.itemAtPosition(8, x).widget()
+            button.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_4_2.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_4_3.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_4_6.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_4_7.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_5_2.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_5_7.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_7_4.setStyleSheet(f"background-color: {color_loser}")
+        self.ui.b_7_5.setStyleSheet(f"background-color: {color_loser}")
+
+
+
     def __init__(self):
         super(Main_Window, self).__init__()
         self.ui = Ui_MainWindow()
