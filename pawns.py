@@ -13,17 +13,18 @@ class Pawn(ABC):
             move_added[0] += move[0]
             move_added[1] += move[1]
             if(move_added[0] >= 0 and move_added[0] <= 9 and move_added[1] >= 0 and move_added[1] <= 9):
-                if(not board[move_added[0]][move_added[1]]):
+                if(not board[move_added[0]][move_added[1]][0]):
                     moves.append(move_added)
                 else:
-                    if (self.color != board[move_added[0]][move_added[1]].color):
+                    if (self.color != board[move_added[0]][move_added[1]][0].color):
                         move_next = [move_added[0], move_added[1]]
                         move_next[0] += move[0]
                         move_next[1] += move[1]
                         if(move_next[0] >= 0 and move_next[0] <= 9 and move_next[1] >= 0 and move_next[1] <= 9):
-                            if(not board[move_next[0]][move_next[1]]):
+                            if(not board[move_next[0]][move_next[1]][0]):
                                 enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
                                 continue
+        print(moves, enemies)
         return moves, enemies
 
 
@@ -43,16 +44,16 @@ class Queen(Pawn):
                 move_added[0] += move[0]
                 move_added[1] += move[1]
                 if(move_added[0] >= 0 and move_added[0] <= 9 and move_added[1] >= 0 and move_added[1] <= 9):
-                    if(not board[move_added[0]][move_added[1]] and not enemy_found):
+                    if(not board[move_added[0]][move_added[1]][0] and not enemy_found):
                         moves.append([move_added[0], move_added[1]])
                     else:
-                        if (self.color != board[move_added[0]][move_added[1]].color):
+                        if (self.color != board[move_added[0]][move_added[1]][0].color):
                             enemy_found = True
                             move_next = [move_added[0], move_added[1]]
                             move_next[0] += move[0]
                             move_next[1] += move[1]
                             if(move_next[0] >= 0 and move_next[0] <= 9 and move_next[1] >= 0 and move_next[1] <= 9):
-                                if(not board[move_next[0]][move_next[1]]):
+                                if(not board[move_next[0]][move_next[1]][0]):
                                     enemies.append([[move_added[0], move_added[1]], [move_next[0], move_next[1]]])
                                     break
                         break
