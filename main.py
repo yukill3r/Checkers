@@ -1,12 +1,14 @@
 import sys
-from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton
-from PyQt6.QtCore import pyqtSlot, QFile, QTextStream
-from PyQt6.QtGui import QIcon
 from functools import partial
+from PyQt6.QtWidgets import QMainWindow, QApplication
+from PyQt6.QtGui import QIcon
 from default_ui import Ui_MainWindow
-from pawns import *
+from pawns import White, Black, Queen
 
 class Main_Window(QMainWindow):
+    """
+    General gui management
+    """
     positions = [
                 [[None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey']],
                 [[Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white']],
@@ -27,35 +29,56 @@ class Main_Window(QMainWindow):
     black_amount = 20
 
     def generate_title(self):
+        """
+        Generate title based on variables
+        self.base_name
+        self.turn
+        self.white_amount
+        self.black_amount
+        """
         self.setWindowTitle(f"{self.base_name} | {self.turn.capitalize()} | White: {self.white_amount} | Black: {self.black_amount}")
-        
-    def background_color(self, position, button):
-        if not button.styleSheet().replace("background-color: ", "") == self.positions[position[0]][position[1]][1]:
-            button.setStyleSheet("background-color: " + self.positions[position[0]][position[1]][1])
 
-        if(self.positions[position[0]][position[1]][0]):
-            button.setIcon(QIcon(self.positions[position[0]][position[1]][0].image))
+    def background_color(self, position, button):
+        """
+        Set buttons to default background colors
+        """
+        background_element = self.positions[position[0]][position[1]]
+        if not button.styleSheet().replace("background-color: ", "") == background_element[1]:
+            button.setStyleSheet("background-color: " + background_element[1])
+
+        if background_element[0]:
+            button.setIcon(QIcon(background_element[0].image))
         else:
             button.setIcon(QIcon())
 
     def basic_connector(self, position, button):
+        """
+        Set buttons connectors to default ones
+        """
+        background_element = self.positions[position[0]][position[1]]
         try:
             button.disconnect()
         except:
             pass
-        if (self.positions[position[0]][position[1]][0] != None):
-            button.clicked.connect(partial(self.selectPiece, position))
+        if background_element[0] is not None:
+            button.clicked.connect(partial(self.select_piece, position))
 
     def default_background_color_n_connectors(self):
+        """
+        Executor to assign default colors and connectors
+        """
         for i in range(self.rows):
             for j in range(self.columns):
                 button = self.ui.gridLayout.itemAtPosition(i, j).widget()
                 self.background_color((i, j), button)
                 self.basic_connector((i, j), button)
-    
-    def selectPiece(self, position):
-        if(self.positions[position[0]][position[1]][0]):
-            if(self.positions[position[0]][position[1]][0].color == self.turn):
+
+    def select_piece(self, position):
+        """
+        Select pawn on board, change visuals and connectors
+        """
+        if self.positions[position[0]][position[1]][0]:
+            if self.positions[position[0]][position[1]][0].color == self.turn:
                 self.default_background_color_n_connectors()
                 button = self.ui.gridLayout.itemAtPosition(*position).widget()
                 button.setStyleSheet("background-color: blue")
@@ -64,7 +87,15 @@ class Main_Window(QMainWindow):
                     position[0], position[1], self.positions)
                 self.color_arena(button, position, moves, enemies)
 
-    def color_arena(self, pawn, position, moves = [], enemies = []):
+    def color_arena(self, pawn, position, moves, enemies):
+        """
+        Color arena based on variables from select_piece
+        """
+        #if len(moves) == 0:
+        #    return
+        #elif len(enemies) == 0:
+        #    return
+        
         def generate_move_color(move_place, position, move):
             if not self.positions[move[0]][move[1]][0]:
                 move_place.setStyleSheet("background-color: green")
@@ -75,10 +106,10 @@ class Main_Window(QMainWindow):
                 move_place.clicked.connect(partial(self.move, position, move, position))
 
         def generate_attack_color(attack_place, attack):
-            if(self.positions[attack[0]][attack[1]][0]):
+            if self.positions[attack[0]][attack[1]][0] :
                 attack_place.setStyleSheet("background-color: red")
                 attack_place.disconnect()
-        
+
         def generate_jumps_color(jump_place, position, jump, attack):
             if not self.positions[jump[0]][jump[1]][0]:
                 jump_place.setStyleSheet("background-color: yellow")
@@ -87,7 +118,7 @@ class Main_Window(QMainWindow):
                 except:
                     pass
                 jump_place.clicked.connect(partial(self.move, position, jump, attack))
-    
+
         NoneType = type(None)
         for move in moves:
             move_place = self.ui.gridLayout.itemAtPosition(*move).widget()
@@ -99,26 +130,33 @@ class Main_Window(QMainWindow):
             generate_attack_color(attack_place, attack)
             generate_jumps_color(jump_place, position, jump, attack)
 
-    def move(self, current, next, target):
-        self.positions[next[0]][next[1]][0] = self.positions[current[0]][current[1]][0]
+    def move(self, current, next_p, target):
+        """
+        Move target from current to next_p and remove target if attack
+        """
+        self.positions[next_p[0]][next_p[1]][0] = self.positions[current[0]][current[1]][0]
         if current != target:
-            if isinstance(self.positions[target[0]][target[1]][0], Black) and not self.positions[target[0]][target[1]][0] == None:
+            if (isinstance(self.positions[target[0]][target[1]][0], Black) and not
+                    self.positions[target[0]][target[1]][0] is None):
                 self.black_amount -= 1
-            elif isinstance(self.positions[target[0]][target[1]][0], White) and not self.positions[target[0]][target[1]][0] == None:
+            elif (isinstance(self.positions[target[0]][target[1]][0], White) and not
+                    self.positions[target[0]][target[1]][0] is None):
                 self.white_amount -= 1
         self.positions[current[0]][current[1]][0] = None
         self.positions[target[0]][target[1]][0] = None
-        
+
         try:
-            if isinstance(self.positions[next[0]][next[1]][0], White) or isinstance(self.positions[next[0]][next[1]][0], Black):
-                if not isinstance(self.positions[next[0]][next[1]][0], Queen):
-                    if self.positions[next[0]][next[1]][0].color == "white" and next[0] == 0:
-                        self.upgrade_to_queen(next)
-                    elif self.positions[next[0]][next[1]][0].color == "black" and next[0] == self.rows-1:
-                        self.upgrade_to_queen(next)
+            if (isinstance(self.positions[next_p[0]][next_p[1]][0], White) or
+                    isinstance(self.positions[next_p[0]][next_p[1]][0], Black)):
+                if not isinstance(self.positions[next_p[0]][next_p[1]][0], Queen):
+                    if self.positions[next_p[0]][next_p[1]][0].color == "white" and next_p[0] == 0:
+                        self.upgrade_to_queen(next_p)
+                    elif (self.positions[next_p[0]][next_p[1]][0].color == "black" and
+                            next_p[0] == self.rows-1):
+                        self.upgrade_to_queen(next_p)
         except Exception as e:
             print(e)
-        
+
         if self.turn == "white":
             self.turn = "black"
         else:
@@ -132,6 +170,9 @@ class Main_Window(QMainWindow):
         self.default_background_color_n_connectors()
 
     def upgrade_to_queen(self, position):
+        """
+        Upgrade pawn to queen and remove old memory alloc
+        """
         pawn = self.positions[position[0]][position[1]][0]
         queen = Queen()
         queen.color = pawn.color
@@ -140,6 +181,9 @@ class Main_Window(QMainWindow):
         del pawn
 
     def ending_win(self, color_winner, color_loser):
+        """
+        Do not look cursed land below
+        """
         for x in range(10):
             for z in [0, 1, 8, 9]:
                 button = self.ui.gridLayout.itemAtPosition(x, z).widget()
@@ -181,7 +225,7 @@ class Main_Window(QMainWindow):
         self.ui.setupUi(self)
         self.generate_title()
         self.default_background_color_n_connectors()
-            
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Main_Window()
