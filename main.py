@@ -3,7 +3,7 @@ from functools import partial
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from PyQt6.QtGui import QIcon
 from default_ui import Ui_MainWindow
-from pawns import White, Black, Queen
+from pawns import White, Black, Queen, Pawn
 
 class Main_Window(QMainWindow):
     """
@@ -43,13 +43,19 @@ class Main_Window(QMainWindow):
         Set buttons to default background colors
         """
         background_element = self.positions[position[0]][position[1]]
+        button_type = None
+        if isinstance(background_element[0], Pawn):
+            button_type = "pawn"
+        else:
+            button_type = "queen"
+
         if not button.styleSheet().replace("background-color: ", "") == background_element[1]:
             button.setStyleSheet("background-color: " + background_element[1])
 
         if background_element[0]:
-            button.setIcon(QIcon(background_element[0].image))
+            button.setIcon(self.cached_icons[button_type][background_element[0].color])
         else:
-            button.setIcon(QIcon())
+            button.setIcon(self.cached_icons["clean"])
 
     def basic_connector(self, position, button):
         """
@@ -176,7 +182,6 @@ class Main_Window(QMainWindow):
         pawn = self.positions[position[0]][position[1]][0]
         queen = Queen()
         queen.color = pawn.color
-        queen.image = f"img/queen{pawn.color.capitalize()}"
         self.positions[position[0]][position[1]][0] = queen
         del pawn
 
@@ -223,6 +228,11 @@ class Main_Window(QMainWindow):
         super(Main_Window, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.cached_icons = {
+            "clean": QIcon(),
+            "pawn": {"white": QIcon("img/pawnWhite.png"), "black": QIcon("img/pawnBlack.png")},
+            "queen": {"white": QIcon("img/queenWhite.png"), "black": QIcon("img/queenBlack.png")}
+            }
         self.generate_title()
         self.default_background_color_n_connectors()
 

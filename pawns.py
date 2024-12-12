@@ -1,4 +1,5 @@
 from abc import ABC
+from PyQt6.QtGui import QIcon
 
 class Pawn(ABC):
     """
@@ -89,7 +90,6 @@ class White(Pawn):
     Class with arguments for white pawn
     """
     color = "white"
-    image = 'img/pawnWhite.png'
     possibleMoves = [[-1, -1], [-1, 1]]
 
     def __init__(self):
@@ -100,7 +100,6 @@ class Black(Pawn):
     Class with arguments for black pawn
     """
     color = "black"
-    image = 'img/pawnBlack.png'
     possibleMoves = [[1, -1], [1, 1]]
 
     def __init__(self):
