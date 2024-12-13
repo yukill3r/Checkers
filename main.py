@@ -44,10 +44,10 @@ class Main_Window(QMainWindow):
         """
         background_element = self.positions[position[0]][position[1]]
         button_type = None
-        if isinstance(background_element[0], Pawn):
-            button_type = "pawn"
-        else:
+        if isinstance(background_element[0], Queen):
             button_type = "queen"
+        else:
+            button_type = "pawn"
 
         if not button.styleSheet().replace("background-color: ", "") == background_element[1]:
             button.setStyleSheet("background-color: " + background_element[1])
