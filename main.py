@@ -7,8 +7,11 @@ from pawns import White, Black, Queen, Pawn
 
 class Main_Window(QMainWindow):
     """
-    General gui management
+    Main GUI management for a checkers-like game.
+    This class initializes the game board, manages interactions,
+    and handles game logic such as moves, captures, and game end conditions.
     """
+    # Board initialization: 10x10 board with initial positions of pawns.
     positions = [
                 [[None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey']],
                 [[Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white'], [Black(), 'grey'], [None, 'white']],
@@ -30,17 +33,21 @@ class Main_Window(QMainWindow):
 
     def generate_title(self):
         """
-        Generate title based on variables
-        self.base_name
-        self.turn
-        self.white_amount
-        self.black_amount
+        Generate the window title based on game state.
+        The title includes:
+        - Base name ("Warcaby")
+        - Current player's turn
+        - Remaining pieces for each color
         """
         self.setWindowTitle(f"{self.base_name} | {self.turn.capitalize()} | White: {self.white_amount} | Black: {self.black_amount}")
 
     def background_color(self, position, button):
         """
-        Set buttons to default background colors
+        Set the button's background color and icon based on its state.
+
+        Args:
+            position (tuple): Coordinates of the button on the board.
+            button (QPushButton): The button to update.
         """
         background_element = self.positions[position[0]][position[1]]
         button_type = None
@@ -59,7 +66,11 @@ class Main_Window(QMainWindow):
 
     def basic_connector(self, position, button):
         """
-        Set buttons connectors to default ones
+        Connect button actions to default handlers based on its state.
+
+        Args:
+            position (tuple): Coordinates of the button on the board.
+            button (QPushButton): The button to update.
         """
         background_element = self.positions[position[0]][position[1]]
         try:
@@ -71,7 +82,7 @@ class Main_Window(QMainWindow):
 
     def default_background_color_n_connectors(self):
         """
-        Executor to assign default colors and connectors
+        Set default background colors and connections for all buttons on the board.
         """
         for i in range(self.rows):
             for j in range(self.columns):
@@ -81,7 +92,10 @@ class Main_Window(QMainWindow):
 
     def select_piece(self, position):
         """
-        Select pawn on board, change visuals and connectors
+        Select a piece on the board, highlighting its possible moves and attacks.
+
+        Args:
+            position (tuple): Coordinates of the selected piece.
         """
         if self.positions[position[0]][position[1]][0]:
             if self.positions[position[0]][position[1]][0].color == self.turn:
@@ -95,12 +109,14 @@ class Main_Window(QMainWindow):
 
     def color_arena(self, pawn, position, moves, enemies):
         """
-        Color arena based on variables from select_piece
+        Highlight possible moves, attacks, and jumps for a selected piece.
+
+        Args:
+            pawn (QPushButton): The selected piece.
+            position (tuple): Coordinates of the selected piece.
+            moves (list): List of possible moves.
+            enemies (list): List of possible attacks (with jumps).
         """
-        #if len(moves) == 0:
-        #    return
-        #elif len(enemies) == 0:
-        #    return
         
         def generate_move_color(move_place, position, move):
             if not self.positions[move[0]][move[1]][0]:
@@ -138,7 +154,20 @@ class Main_Window(QMainWindow):
 
     def move(self, current, next_p, target):
         """
-        Move target from current to next_p and remove target if attack
+        Execute a move or capture in the game.
+
+        Args:
+            current (tuple): Current position of the piece as (row, col).
+            next_p (tuple): New position of the piece as (row, col).
+            target (tuple): Target position of a piece being captured, if applicable.
+
+        Updates:
+            - Moves a piece from `current` to `next_p`.
+            - Captures a piece at `target` if `current` is different from `target`.
+            - Decrements the number of pieces for the respective player if a capture occurs.
+            - Promotes pawns to queens if conditions are met.
+            - Changes the player's turn.
+            - Checks for game-ending conditions.
         """
         self.positions[next_p[0]][next_p[1]][0] = self.positions[current[0]][current[1]][0]
         if current != target:
@@ -177,7 +206,14 @@ class Main_Window(QMainWindow):
 
     def upgrade_to_queen(self, position):
         """
-        Upgrade pawn to queen and remove old memory alloc
+        Promote a pawn to a queen at a specific position.
+
+        Args:
+            position (tuple): The position (row, col) of the pawn to promote.
+
+        Updates:
+            - Replaces the pawn at the specified position with a queen of the same color.
+            - Frees memory allocated for the original pawn.
         """
         pawn = self.positions[position[0]][position[1]][0]
         queen = Queen()
@@ -187,7 +223,15 @@ class Main_Window(QMainWindow):
 
     def ending_win(self, color_winner, color_loser):
         """
-        Do not look cursed land below
+        Highlight the board to indicate the winning side.
+
+        Args:
+            color_winner (str): Background color for the winner's side.
+            color_loser (str): Background color for the loser's side.
+
+        Updates:
+            - Colors specific sections of the board according to the winner and loser.
+            - Uses a specific pattern to indicate the game over state.
         """
         for x in range(10):
             for z in [0, 1, 8, 9]:
@@ -225,6 +269,14 @@ class Main_Window(QMainWindow):
         self.ui.b_7_5.setStyleSheet(f"background-color: {color_loser}")
 
     def __init__(self):
+        """
+        Initialize the main window of the application.
+
+        Sets up:
+            - UI components using `Ui_MainWindow`.
+            - Cached icons for different pieces (clean, pawn, queen).
+            - Initial game title and default board appearance.
+        """
         super(Main_Window, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -237,6 +289,12 @@ class Main_Window(QMainWindow):
         self.default_background_color_n_connectors()
 
 if __name__ == '__main__':
+    """
+    Main entry point of the application.
+
+    Creates an instance of QApplication, initializes the main window, and starts
+    the application event loop.
+    """
     app = QApplication(sys.argv)
     window = Main_Window()
     window.show()
