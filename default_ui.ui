@@ -2294,6 +2294,18 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menusave">
+    <property name="title">
+     <string>save</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menulod">
+    <property name="title">
+     <string>load</string>
+    </property>
+   </widget>
+   <addaction name="menusave"/>
+   <addaction name="menulod"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
