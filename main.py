@@ -235,6 +235,10 @@ class Main_Window(QMainWindow):
             - Uses a specific pattern to indicate the game over state.
         """
         for x in range(10):
+            for y in range(10):
+                button = self.ui.gridLayout.itemAtPosition(x, y).widget()
+                button.setIcon(self.cached_icons["clean"])
+        for x in range(10):
             for z in [0, 1, 8, 9]:
                 button = self.ui.gridLayout.itemAtPosition(x, z).widget()
                 button.setStyleSheet(f"background-color: {color_winner}")
