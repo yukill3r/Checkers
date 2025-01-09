@@ -202,7 +202,8 @@ class Main_Window(QMainWindow):
             self.ending_win("black", "lightgrey")
         elif not self.black_amount > 0:
             self.ending_win("lightgrey", "black")
-        self.default_background_color_n_connectors()
+        else:
+            self.default_background_color_n_connectors()
 
     def upgrade_to_queen(self, position):
         """
